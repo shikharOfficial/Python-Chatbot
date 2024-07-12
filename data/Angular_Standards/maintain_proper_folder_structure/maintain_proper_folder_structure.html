@@ -1,0 +1,40 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2024"><meta name="DC.rights.owner" content="(C) Copyright 2024"><meta name="DC.Type" content="topic"><meta name="DC.Format" content="HTML5"><meta name="DC.Identifier" content="d69aAab"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Maintain proper folder structure</title></head><body id="d69aAab"><nav role="toc"><ul><li><a href="../../Angular_Standards/introduction/introduction.html">Introduction</a></li><li><a href="../../Angular_Standards/use_angular_cli/use_angular_cli.html">Use Angular CLI</a></li><li class="active"><a href="../../Angular_Standards/maintain_proper_folder_structure/maintain_proper_folder_structure.html">Maintain proper folder structure</a></li><li><a href="../../Angular_Standards/follow_consistent_angular_coding_styles/follow_consistent_angular_coding_styles.html">Follow consistent Angular coding styles</a></li><li><a href="../../Angular_Standards/use_es6_features/use_es6_features.html">Use ES6 features</a></li><li><a href="../../Angular_Standards/use_trackby_along_with_ngfor/use_trackby_along_with_ngfor.html">Use trackBy along with ngFor</a></li><li><a href="../../Angular_Standards/break_down_into_small_reusable_components/break_down_into_small_reusable_components.html">Break down into small reusable components</a></li><li><a href="../../Angular_Standards/use_lazy_loading/use_lazy_loading.html">Use Lazy Loading</a></li><li><a href="../../Angular_Standards/use_index_ts/use_index_ts.html">Use Index.ts</a></li><li><a href="../../Angular_Standards/avoid_logic_in_templates/avoid_logic_in_templates.html">Avoid logic in templates</a></li><li><a href="../../Angular_Standards/_cache_api_calls/_cache_api_calls.html">Cache API calls test</a></li><li><a href="../../Angular_Standards/use_async_pipe_in_templates/use_async_pipe_in_templates.html">Use async pipe in templates</a></li><li><a href="../../Angular_Standards/declare_safe_strings/declare_safe_strings.html">Declare safe strings</a></li><li><a href="../../Angular_Standards/avoid_any_type_when_declaring_constants_and_variables/avoid_any_type_when_declaring_constants_and_variables.html">  Avoid any type when declaring constants and variables  </a></li><li><a href="../../Angular_Standards/state_management/state_management.html">State management</a></li><li><a href="../../Angular_Standards/use_cdk_virtual_scroll/use_cdk_virtual_scroll.html">Use CDK Virtual Scroll</a></li></ul></nav><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+   <h1 class="title topictitle1" id="ariaid-title1">Maintain proper folder structure</h1>
+   <div class="body">
+      <p class="p Para">Folder structure is an <a class="xref" href="#d69aAab__fig1">important </a>factor to consider before initiating a project. The following folder structure will easily adapt to new changes during development.</p>
+      <p class="p Para">-- app</p>
+      <p class="p Para">|-- modules</p>
+      <p class="p Para">|-- home</p>
+      <p class="p Para">|-- [+] components</p>
+      <p class="p Para">|-- [+] pages</p>
+      <p class="p Para">|-- home-routing.module.ts</p>
+      <p class="p Para">|-- home.module.ts</p>
+      <p class="p Para">|-- core</p>
+      <p class="p Para">|-- [+] authentication</p>
+      <p class="p Para">|-- [+] footer</p>
+      <p class="p Para">|-- [+] guards</p>
+      <p class="p Para">|-- [+] http</p>
+      <p class="p Para">|-- [+] interceptors</p>
+      <p class="p Para">|-- [+] mocks</p>
+      <p class="p Para">|-- [+] services</p>
+      <p class="p Para">|-- [+] header</p>
+      <p class="p Para">|-- core.module.ts</p>
+      <p class="p Para">|-- ensureModuleLoadedOnceGuard.ts</p>
+      <p class="p Para">|-- logger.service.ts</p>
+      <p class="p Para">|</p>
+      <p class="p Para">|-- shared</p>
+      <p class="p Para">|-- [+] components</p>
+      <p class="p Para">|-- [+] directives</p>
+      <p class="p Para">|-- [+] pipes</p>
+      <p class="p Para">|-- [+] models</p>
+      <p class="p Para">|</p>
+      <p class="p Para">|-- [+] configs</p>
+      <p class="p Para">|-- assets</p>
+      <p class="p Para">|-- scss</p>
+      <p class="p Para">|-- [+] partials</p>
+      <p class="p Para">|-- _base.scss</p>
+      <p class="p Para">|-- styles.scss</p>
+   </div>
+</article></main></body></html>
