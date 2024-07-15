@@ -1,4 +1,10 @@
 langchain
-chromadb # Vector storage
-pytest
+langchain-community
+chromadb
 boto3
+bs4
+lxml
+python-dotenv
+Flask
+gunicorn==21.2.0
+six
