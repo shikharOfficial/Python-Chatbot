@@ -28,9 +28,6 @@ def query_rag(query_text: str):
 
     model = Ollama(model=EMBEDDING_MODEL_NAME)
     response_text = model.invoke(prompt)
-    
-    for doc in results:
-        print(doc)
 
     sources = [doc.metadata.get("id", None) for doc, _score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"
