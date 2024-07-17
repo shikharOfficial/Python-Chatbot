@@ -38,8 +38,8 @@ class ProcessInputCreateDatabase:
 
     def split_documents(self, documents: list[Document]):
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=5000,
-            chunk_overlap=300,
+            chunk_size=2000,
+            chunk_overlap=200,
             length_function=len,
         )
         return text_splitter.split_documents(documents)
