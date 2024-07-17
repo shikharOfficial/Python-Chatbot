@@ -12,11 +12,13 @@ def create_database():
     try:
         current_dir = current_app.root_path
         input_dir = os.path.abspath(os.path.join(current_dir, '..', DATA_PATH))
+        db_dir = os.path.abspath(os.path.join(current_dir, '..', CHROMA_PATH))
         
         logging.debug(f"current_dir: {current_dir}")
         logging.debug(f"input_dir: {input_dir}")
+        logging.debug(f"db_dir: {db_dir}")
 
-        create_database = ProcessInputCreateDatabase(input_dir)
+        create_database = ProcessInputCreateDatabase(input_dir, db_dir)
         create_database.main()
         message = 'Database created successfully.'   
         
