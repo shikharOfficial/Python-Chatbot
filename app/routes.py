@@ -1,9 +1,11 @@
+# routes.py
+
 from flask import Blueprint, request, jsonify, current_app
 import os
 import logging
-from app.Constants import CHROMA_PATH, DATA_PATH
+from app.Constants import CHROMA_PATH, DATA_PATH, PINECONE_API_KEY
 from app.create_database import ProcessInputCreateDatabase
-from app.query_data import query_rag
+from app.query_data import query_pinecone
 
 main = Blueprint('main', __name__)
 
@@ -12,15 +14,13 @@ def create_database():
     try:
         current_dir = current_app.root_path
         input_dir = os.path.abspath(os.path.join(current_dir, '..', DATA_PATH))
-        db_dir = os.path.abspath(os.path.join(current_dir, '..', CHROMA_PATH))
-        
+
         logging.debug(f"current_dir: {current_dir}")
         logging.debug(f"input_dir: {input_dir}")
-        logging.debug(f"db_dir: {db_dir}")
 
-        create_database = ProcessInputCreateDatabase(input_dir, db_dir)
+        create_database = ProcessInputCreateDatabase(input_directory=input_dir)
         create_database.main()
-        message = 'Database created successfully.'   
+        message = 'Database created successfully.'
         
         logging.debug(message)    
         
@@ -38,15 +38,8 @@ def handle_query():
     if not query_text:
         return jsonify({'error': 'query_text is required'}), 400
     
-    current_dir = current_app.root_path
-    db_dir = os.path.abspath(os.path.join(current_dir, '..', CHROMA_PATH))
-    
-    if not os.path.exists(db_dir):
-        return jsonify({ 'error': 'Database not found! '}), 404
-
     try:
-        results = query_rag(query_text)
-        
+        results = query_pinecone(query_text)
         return jsonify({'results': results}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

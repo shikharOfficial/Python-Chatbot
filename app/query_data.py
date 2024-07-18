@@ -1,11 +1,8 @@
-import os
-from flask import current_app
-from langchain_community.vectorstores import Chroma
-from langchain.prompts import ChatPromptTemplate
 from langchain_community.llms.ollama import Ollama
-
+from langchain.prompts import ChatPromptTemplate
 from app.get_embedding_function import get_embedding_function
-from app.Constants import CHROMA_PATH, EMBEDDING_MODEL_NAME
+from app.Constants import EMBEDDING_MODEL_NAME, PINECONE_API_KEY, PINECONE_INDEX_NAME
+from pinecone import Pinecone
 
 PROMPT_TEMPLATE = """
 Answer the question based on the context below. If you can't answer the question, reply "I don't know".
@@ -17,17 +14,13 @@ Question: {question}
 
 """
 
-def query_rag(query_text: str):
+def query_pinecone(query_text):
     embedding_function = get_embedding_function()
-    current_dir = current_app.root_path
-    full_path = os.path.abspath(os.path.join(current_dir, '..', CHROMA_PATH))
-    print(full_path)
-    db = Chroma(persist_directory=full_path, embedding_function=embedding_function)
+    pinecone = Pinecone(api_key=PINECONE_API_KEY)
+    vector_query = embedding_function(query_text)
+    results = pinecone.query(index_name=PINECONE_INDEX_NAME, query_vector=vector_query.tolist(), top_k=5)
 
-    # Search the DB.
-    results = db.similarity_search_with_score(query_text, k=5)
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
-    
+    context_text = "\n\n---\n\n".join([doc['metadata']['page_content'] for doc in results['matches']])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
 
@@ -35,5 +28,3 @@ def query_rag(query_text: str):
     response_text = model.invoke(prompt)
     
     return response_text
-
-    
